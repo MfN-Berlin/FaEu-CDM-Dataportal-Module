@@ -1,0 +1,7 @@
+name = "Fauna Europaea"
+description = "Extension to the cdm dataportal module specific to the FaunaEuropaea project"
+version = 7.x-1.0
+package = "CDM Extensions for FaunaEuropaea"
+dependencies[] = cdm_dataportal
+stylesheets[all][] = faeu.css
+core = 7.x

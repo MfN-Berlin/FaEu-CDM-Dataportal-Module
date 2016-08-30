@@ -1,0 +1,346 @@
+<?php
+
+/*
+ * hook adapted 
+ * by thomas.pfuhl@mfn-berlin.de, Nov. 2015 - June 2016
+ * by guenther.korb@mfn-berlin.de, Nov. 2015 - June 2016
+ * please see README.md
+ *  
+ * using jQuery 1.4.4
+ *  
+ * european country list:
+ * got from database and defined statically in file country_europe.php, since there is no API access:
+       SELECT titleCache, iso3166_a2, definedtermbase_continent . *
+       FROM `definedtermbase`
+       JOIN definedtermbase_continent ON definedtermbase.id = definedtermbase_continent.DefinedTermBase_id
+       WHERE definedtermbase.DTYPE = "Country"
+       AND definedtermbase_continent.continents_id = '505'
+       ORDER BY definedtermbase_continent.continents_id, definedtermbase.titleCache;
+ * some country names are modified by hand, see country_europe.php
+ * 
+ * entire country list getAllCountries():
+ * got via API http://cdm.biodiv.naturkundemuseum-berlin.de/cdm/cdmfauneur2/term?start=0&limit=-1&class=Country";
+ * -- not used ---
+ * 
+ * 
+ */
+define("DEBUGMODE",1);
+
+
+
+// $id$
+/**
+ * @file
+ * Extensions to the cdm dataportal specific for the FaEu project
+*/
+
+/**
+ * Implements the hook_user_login(&$edit, $account)
+ *
+*/
+function faeu_user_login(&$edit, $account) {
+    // welcome user
+    drupal_set_message('Welcome to the Fauna Europaea Portal, ' . $account -> name);
+}
+
+
+
+/**
+ * FOR DEBUGGING ONLY 
+ *
+*/
+function faeu_debuginfo($msg, $level=1) {
+    if (DEBUGMODE == $level) {
+        echo "<div class='debug-control' onclick='jQuery(\".debuginfo\").toggle()'>TOGGLE DEBUGINFO ".$msg."</div>";
+    }
+}
+
+
+function getAllCountries () {
+
+    $ch = curl_init();
+
+    $url = "http://cdm.biodiv.naturkundemuseum-berlin.de/cdm/cdmfauneur2/term";
+    $query = "start=0&limit=-1&class=Country";
+    
+    // Set URL to download
+    curl_setopt($ch, CURLOPT_URL, $url . "?" . $query );
+
+    // Set a referer
+    //curl_setopt($ch, CURLOPT_REFERER, "http://cdm.biodiv.naturkundemuseum-berlin.de");
+    // User agent
+    //curl_setopt($ch, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
+    // Include header in result? (0 = yes, 1 = no)
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    // Should cURL return or print out the data? (true = return, false = print)
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Timeout in seconds
+    curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+
+    // Download the given URL, and return output
+    $xml = curl_exec($ch);
+
+    // Close the cURL resource, and free system resources
+    curl_close($ch);
+
+    
+    $xslt_stylesheet = '<?xml version="1.0" encoding="UTF-8"?>
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:output method="text" omit-xml-declaration="no"/> 
+
+    <xsl:template match="//e">
+        <xsl:text>&#xa;,[</xsl:text>
+        <xsl:value-of select="iso3166_A2"/>
+        <xsl:text>,"</xsl:text>
+        <xsl:value-of select="representation_L10n"/>
+        <xsl:text>"]</xsl:text>
+    </xsl:template>
+   
+    </xsl:stylesheet>';
+
+    $xslt = new XSLTProcessor();
+    $xslt->importStylesheet(new SimpleXMLElement($xslt_stylesheet));
+    
+    return $xslt->transformToXml(new SimpleXMLElement($xml));
+}
+
+
+
+
+/**
+ * Alter the content of a feature block.
+ *
+ * Modules implementing this hook can add, remove or modify
+ * feature blocks contents of the taxon general page part and of the
+ * specimen page part.
+ *
+ * @param array $block_content
+ *   Drupal render array for the content of the feature block
+ * @param object $feature
+ *   The feature this block belongs to
+ * @param object $elements
+ *   An array of CDM DescriptionElement instances which are being displayed in
+ *   this block. Even if this array is passed as reference it should not being
+ *   altered. Passing by reference is only recommended to reduce the memory
+ *   footprint.
+ *
+ * Some Examples for distribution data:
+ *
+ *	if($feature->uuid == UUID_DISTRIBUTION) {
+ *       $block_content['my_custom_render_element'] = array(
+ *            '#type' => 'markup',
+ *            '#markup' => '<h1>Hello Universe</h1>',
+ *            '#weight' => 99, // Show at the bottom of the block
+ *       );
+ *		  
+ *		 $block_content[1]['#markup']='<h1>Hello Universe</h1>';
+ *
+ *		 $block_content['my_custom_render_element'] = array(
+ *            '#type' => 'markup',
+ *            '#markup' => '<p>'.$block_content[1]['#markup'].'</p>',
+ *            '#weight' => 99, // Show at the bottom of the block
+ *       );
+ *
+ *       $block_content['info'] = array(
+ *            '#type' => 'markup',
+ *            '#markup' => '<p>'.var_dump($feature ["DistributionInfoDTO"]["tree"]["rootElement"]["children"]["nodeId"][][]).'</p>',
+ *            '#weight' => 99, // Show at the bottom of the block
+ *       );
+ *  }
+ */
+function faeu_cdm_feature_node_block_content_alter(&$block_content, $feature, &$elements) {
+    
+// This function provides a country/region list with distribution status (absent, present, doubtful) 
+// according to the presentation in the Oracle-FaunaEuropaea portal.
+// 
+// This list replaces the former content of $block_content[1]['#markup']
+
+    
+    if ($feature->uuid == UUID_COMMON_NAME) {
+        $orig_content = $block_content[1]['#markup'];
+
+    };
+    
+//      $block_content['info'] = array(
+//           '#type' => 'markup',
+//           '#markup' => '<p>'.var_dump($feature ["DistributionInfoDTO"]["tree"]["rootElement"]["children"]["nodeId"][][]).'</p>',
+//           '#weight' => 99, // Show at the bottom of the block
+//      );
+
+// var_dump($Elements);
+
+
+
+// return;
+
+    if ($feature->uuid == UUID_DISTRIBUTION) {
+        include("country_europe.php");
+
+        $distribution_block = "";
+        
+        //arrays to gather distribution data extracted from $elements (array of CDM DescriptionElement instances)
+        // countries, regions in Europe
+        $distribution = array();
+        // regions worldwide
+        $distribution_world = array();
+
+        // countries/regions without TWG Level info in $elements, belonging to Europe, to include in $distribution (distribution in European country and regions)
+        $europe=array("Crete", "Cyclades Is.", "Dodecanese Is.", "Franz Josef Land", "North Aegean Is.", "Novaya Zemlya", "Ukraine");
+
+        $count = $elements["DistributionInfoDTO"]->tree->rootElement->numberOfChildren;
+
+
+        // loop through Level 1, Continents, continental regions, countries/regions without TWG Level info
+        for ($i = 0; $i < $count; $i++)  {
+                $count_2=$elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->numberOfChildren;  
+                if ($count_2 > 0)  {
+                        // loop through Level 2, african regions, european regions
+                        for ($j = 0; $j < $count_2; $j++) {
+                                $count_3=$elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->numberOfChildren;
+                                if ($count_3 > 0)  {
+                                        // loop through TDWG Level 3, countries Level 3
+                                        for ($k = 0; $k < $count_3; $k++) {
+
+                                                //Yugoslavia (TDGW Level 3) have to be considered!
+                                                if($elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->children[$k]->nodeId->titleCache == "Yugoslavia" &&
+                                                        !empty($elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->children[$k]->data)) {
+                                                                // distribution data for Yugoslavia
+                                                                $distribution[$elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->children[$k]->nodeId->titleCache]
+                                                                = $elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->children[$k]->data[0]->status->titleCache;
+                                                }
+
+                                                $count_4=$elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->children[$k]->numberOfChildren;
+                                                if ($count_4 > 0)  {
+                                                        // loop through TDWG Level 4, countries Level 4
+                                                        for ($m = 0; $m < $count_4; $m++) {	
+                                                                $distribution[$elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->children[$k]->children[$m]->nodeId->titleCache] 
+                                                                =$elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->children[$j]->children[$k]->children[$m]->data[0]->status->titleCache;
+
+                                                        }
+                                                }
+                                        }													
+                                }
+                        }
+
+                } else  {
+
+                        // countries/regions without TWG Level info, to be integrated into the European country distribution list 
+                        if (in_array($elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->nodeId->titleCache, $europe))  {
+                                $distribution[$elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->nodeId->titleCache]
+                                = $elements["DistributionInfoDTO"]->tree->rootElement->children[$i]->data[0]->status->titleCache;
+                        }
+                }
+        }
+
+
+
+
+        // regions without TWG Level info worldwide
+        for ($i = 0; $i < $count; $i++) {
+                $count_2=$elements["DistributionInfoDTO"]
+                                                ->tree
+                                                        ->rootElement
+                                                                ->children[$i]
+                                                                        ->numberOfChildren;
+                if ($count_2 == 0)  {
+                        if (!in_array($elements["DistributionInfoDTO"]
+                                                                                        ->tree
+                                                                                                ->rootElement
+                                                                                                        ->children[$i]
+                                                                                                                ->nodeId
+                                                                                                                        ->titleCache, $europe))  {
+                                $distribution_world[$elements["DistributionInfoDTO"]
+                                                                                        ->tree
+                                                                                                ->rootElement
+                                                                                                        ->children[$i]
+                                                                                                                ->nodeId
+                                                                                                                        ->titleCache]
+                                                                        = $elements["DistributionInfoDTO"]
+                                                                                        ->tree
+                                                                                                ->rootElement
+                                                                                                        ->children[$i]
+                                                                                                                ->data[0]
+                                                                                                                        ->status
+                                                                                                                                ->titleCache;
+                        }
+                }	
+        }
+		                   
+        $total_distribution = array_merge($european_countries, $distribution);
+                                
+        array_multisort(
+                        array_values($total_distribution), SORT_DESC, 
+                        array_keys($total_distribution), SORT_ASC, 
+                        $total_distribution); 
+                
+        asort($total_distribution);
+                
+        // holds complete tree in JSON-Format
+        $distribution_block .= "<div id='dist' style='display:none'>"
+                                . json_encode($elements["DistributionInfoDTO"]->tree->rootElement, JSON_FORCE_OBJECT) 
+                                . "</div>";
+        //displays complete tree with jsonview
+        $distribution_block .= "<div id='dist-view' class='debuginfo'></div>";
+               
+        //renders distribution data, uses styles defined in faeu.css       
+        $distribution_block .=  '<table id="distribution_world" class="distributionlist_table">
+                                                                <caption class="distributionlist_caption">Distribution Europe and worldwide</caption>
+                                                                <colgroup class="distributionlist_colgroup">
+                                                                        <col class="distributionlist_col_country_region">
+                                                                        <col class="distributionlist_col_status">
+                                                                </colgroup>
+                                                                <thead>
+                                                                        <tr>
+                                                                                <th class="distributionlist_head">Region</th>
+                                                                                <th class="distributionlist_head">Status</th>
+                                                                        </tr>
+                                                                </thead>';
+
+        foreach ($distribution_world as $k => $v) {
+                $distribution_block .= '<tr class="'.$v.'"><td>'.$k.'</td><td>'.$v.'</td></tr>';
+        }
+        $distribution_block .= '</table>';
+		                
+                
+		$block_content[1]['#markup'] = '<p>'.$distribution_block.'</p>';
+		
+    }
+    
+    // load jquery-ui from module cdm_dataportal
+    $my_path = drupal_get_path('module', 'cdm_dataportal') . '/js/jquery-ui-1.8.24/ui/jquery-ui.js';
+    drupal_add_js( $my_path );
+    
+    // using dataTables from module cdm_dataportal (loaded by default)
+    // This software was originally released on 23rd September, 2012.
+    // recent versions require at least jQuery 1.7
+    $my_path = drupal_get_path('module', 'cdm_dataportal') . '/js/DataTables-1.9.4/media/js/jquery.dataTables.min.js';
+    drupal_add_js( $my_path );
+    drupal_add_css(drupal_get_path('module', 'cdm_dataportal') . '/js/DataTables-1.9.4/media/css/jquery.dataTables.css');
+    
+    // load explicitly faeu.js 
+    $my_path = drupal_get_path('module', 'faeu') . '/faeu.js';
+    drupal_add_js( $my_path );
+    
+    // load javascript file for  json view (debugging only)
+    $my_path = drupal_get_path('module', 'faeu') . '/jquery.jsonview.js';
+    drupal_add_js( $my_path );
+}
+
+
+
+function faeu_merged_taxon_feature_tree_alter($taxon, &$merged_tree){
+   // find the distribution feature node
+   //$distribution_node =& cdm_feature_tree_find_node($merged_tree->root->childnodes, UUID_DISTRIBUTION);
+   // remove all TextData
+   //$distribution_node->descriptionElements['TextData'] = array();
+   
+    faeu_debuginfo(print_r($distribution_node->descriptionElements['TextData'],true));
+}
+
+/**
+* @} End of "addtogroup hooks".
+*/
+

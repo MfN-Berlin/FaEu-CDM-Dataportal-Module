@@ -1,0 +1,79 @@
+AREA;;;;
+ARA_ID;ARA_NAME;ARA_CODE;ARA_EXTRALIMITAL;ARA_DESCRIPTION
+1;Andorra;AD;0;
+2;Albania;AL;0;
+3;Austria;AT;0;
+4;Bosnia and Herzegovina;BA;0;
+5;Belgium;BE;0;
+6;Bulgaria;BG;0;
+7;Belarus;BY;0;
+8;Switzerland;CH;0;
+9;Cyprus;CY;0;
+10;Czech Republic;CZ;0;
+11;Germany;DE;0;
+12;Danish mainland;DK-DEN;0;Incl. Borholm I.
+13;Faroe Is.;DK-FOR;0;
+14;Estonia;EE;0;
+15;Balearic Is.;ES-BAL;0;Incl. Mallorca I., Menorca I., and Pityuses Is. (= Ibiza I. + Formentera I.)
+16;Canary Is.;ES-CNY;0;
+17;Spanish mainland;ES-SPA;0;Incl. Alboran I.
+18;Finland;FI;0;
+19;Corsica;FR-COR;0;
+20;French mainland;FR-FRA;0;
+21;Channel Is.;GB-CI;0;Incl. Jersey, Guernsey, Alderney
+22;Gibraltar;GB-GI;0;
+23;Britain I.;GB-GRB;0;Incl. Shetlands, Orkneys, Hebrides and Man Is.
+24;Northern Ireland;GB-NI;0;
+25;North Aegean Is.;GR-AEG;0;Incl. Andipsara, Ayios Evstratios, Fournoi, Ikaria, Khios, Lesvos, Limnos, Oinousa, Psara, Samos, Skopelos Kaloyeroi and other smaller islands
+26;Cyclades Is.;GR-CYC;0;Incl. Amorgos, Anafi, Anidros, Andros, Andiparos, Denousa, Folegandros, Ios, Iraklia, Karos, Kimolos, Kea, Kythnos, Milos, Mykonos, Naxos, Paros, Poliaigos, Serifos, Sifnos, Sikinos, Syros, Thira, Tinos, Yiaros and other smaller islands
+27;Dodecanese Is.;GR-DOD;0;Incl. Alimnia, Arkoi, Astipalaia, Avgonisi, Ankathonisi, Farmakonisi, Ioinianisia, Kalimnos, Kalolimnos, Kandeliousa, Karpathos, Kasos, Khalki, Khamili, Kinaros, Kos, Leros, Levitha, Lipsoi, Meyisti, Nisiros, Ofidousa, Patmos, Rodhos, Saria, Simi, Sirina,
+28;Greek mainland;GR-GRC;0;Incl. Andikithira I., Evvia I., Ionian Is., Samothraki I., Northern Sporades Is., Thasos I.
+29;Crete;GR-KRI;0;Incl. small adjacent islands like Gavdhos. Note that Andikithira I. although being closer to Kriti than to mainland, belongs to a mainland province
+30;Croatia;HR;0;
+31;Hungary;HU;0;
+32;Ireland;IE;0;Not incl. Northern Ireland (GB-NI)
+33;Iceland;IS;0;
+34;Italian mainland;IT-ITA;0;
+35;Sardinia;IT-SAR;0;
+36;Sicily;IT-SI;0;Incl. adjacent Italian islands (Lipari Is., Ustica I., Egadi Is., Pantelleria I., Pelagie Is.)
+37;Liechtenstein;LI;0;
+38;Lithuania;LT;0;
+39;Luxembourg;LU;0;
+40;Latvia;LV;0;
+41;Monaco;MC;0;
+42;Moldova, Republic of;MD;0;
+43;Macedonia;MK;0;
+44;Malta;MT;0;
+45;The Netherlands;NL;0;
+46;Norwegian mainland;NO-NOR;0;
+47;Svalbard & Jan Mayen;NO-SVA;0;Incl. Bear I.
+48;Poland;PL;0;
+49;Azores;PT-AZO;0;
+50;Madeira;PT-MDR;0;
+51;Portuguese mainland;PT-POR;0;
+52;Selvagens Is.;PT-SEL;0;
+53;Romania;RO;0;
+54;Franz Josef Land;RU-FJL;0;Not incl. Ushakova I. and Vize I.
+55;Kaliningrad Region;RU-KGD;0;
+56;Novaya Zemlya;RU-NOZ;0;
+57;Russia Central;RU-RUC;0;
+58;Russia East;RU-RUE;0;
+59;Russia North;RU-RUN;0;
+60;Russia South;RU-RUS;0;
+61;Russia Northwest;RU-RUW;0;
+62;Sweden;SE;0;Incl. Gotland I.
+63;Slovenia;SI;0;
+64;Slovakia;SK;0;
+65;San Marino;SM;0;
+66;European Turkey;TR-TUE;0;Incl. Imroz I. - Gokceada, but not those in the Sea of Marmara
+67;Ukraine;UA;0;
+68;Vatican City;VA;0;
+69;Yugoslavia;YU;0;Incl. Serbia, Kosovo, Voivodina, Montenegro
+70;Afro-tropical region;AFR;1;
+71;Australian region;AUS;1;
+72;East Palaearctic;EPA;1;East of the border line here defined
+73;North Africa;NAF;1;Not including Sinai Peninsula
+74;Nearctic region;NEA;1;
+75;Neotropical region;NEO;1;
+76;Near East;NRE;1;Asian Turkey, Caucasian Russian republics, Georgia, Armenia, Azerbaidjan, Lebanon, Syria, Israel, Jordan, Sinai Peninsula (Egypt), Arabian peninsula, Iran, Iraq
+77;Oriental region;ORR;1;

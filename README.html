@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>README</title>
+<style type="text/css">/*...*/</style>
+</head>
+<body>
+<h1>Fauna Europaea</h1>
+<ol>
+  <li>Literaturverweise</li>
+  <li>Distribution per country (present, absent, no data)</li>
+  <li>Experten (per taxon)</li>
+  <li>vernacular names</li>
+</ol><p>meeting 2.11.2015<br/>deliver 15.11.2015 </p><h2>Layout</h2><p>in TABs präsentieren<br/>gruppieren und sortieren, via datatables &amp; jQuery </p><p>jquery datatables needs jqery 1.7 </p>
+<pre><code>&lt;!-- DataTables CSS --&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;//cdn.datatables.net/1.10.9/css/jquery.dataTables.css&quot;&gt;
+
+&lt;!-- jQuery --&gt;
+&lt;script type=&quot;text/javascript&quot; charset=&quot;utf8&quot; src=&quot;//code.jquery.com/jquery-1.10.2.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- DataTables --&gt;
+&lt;script type=&quot;text/javascript&quot; charset=&quot;utf8&quot; src=&quot;//cdn.datatables.net/1.10.9/js/jquery.dataTables.js&quot;&gt;&lt;/script&gt;
+
+
+$(document).ready( function () {
+    $(&#39;#table_id&#39;).DataTable();
+} );
+</body>
+</html>

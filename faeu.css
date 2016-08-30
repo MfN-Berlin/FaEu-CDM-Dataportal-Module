@@ -1,0 +1,589 @@
+/**
+ * @file
+ * CSS Extensions to the cdm data portal specific for the FaEu project
+
+ * THE COLOUR "RED" OF THE MUSEUM LOGO is: #d50000
+
+ **/
+
+
+/******************************
+* RESPONSIVE DROP DOWN MENUS 
+
+#navigation {}
+#navigation .links  {
+    margin: 0 !important;
+}
+nav#main-menu {
+    padding-left: 0 !important;
+}
+ul#main-menu {
+    padding-left: 0 !important;
+    height: 20px;
+    background-color: inherit;
+}
+
+ul.sub-menu {
+    padding-top: 5px;
+    margin-left: -2.9em;
+    width: 15em;
+}
+ul.sub-menu li {
+    margin-top: 1px;
+    padding-top: 3px;
+    border: 0 solid black !important;
+    background-color: #dedede;
+    line-height: 20px;
+    min-height: 30px;
+    max-height: 60px;
+    width: auto;
+    float: none !important;
+}
+*/
+
+/*******************
+* NICE MENUS 
+*/
+#main-menu ,#secondary-menu {
+    display:none !important;
+}
+
+#navigation ul.nice-menu {
+    width:100%;
+    font-size: 1.2em;
+}
+#navigation ul.nice-menu li {
+    min-width: 7em;
+    max-width: 18em;
+    text-align: left;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+#navigation ul.nice-menu-down li.menuparent {
+    background: #dedede url("../nice_menus/images/arrow-down.png") no-repeat scroll right center !important;
+}
+#navigation ul.nice-menu-down li {
+    background: #dedede !important;
+    border-right: 1px solid #000 !important;
+}
+#navigation ul.nice-menu li a {
+    color: black !important;
+}
+#navigation ul.nice-menu li div.nolink {
+    margin-top: 5px;
+}
+
+#header a,
+#content a, 
+#search_results a span.name,
+ul.cdm_taxontree li a, 
+#block-cdm-taxontree-cdm-tree .block a, 
+#block-ext-links-0 a {
+    color: #d50000 !important; 
+    text-decoration: none;
+}
+
+table tr.views-row-first > td:nth-child(1){
+    font-size: 1em !important;
+    min-width:30%;
+    max-width:40%;
+}
+
+#block-ext-links-0 a:hover {
+    text-decoration: underline !important;
+}
+
+#block-ext-links-0 div.category div {
+    margin-left: 10px;
+}
+
+.page-part {
+    clear: both !important;
+    padding-top: 20px;
+}
+
+.page-part h2 {
+    padding-left: 10px;
+    padding-bottom: 3px;
+    background-color: #d1d1d1; 
+}
+
+li.tabs-primary__tab {
+    font-size:0.9em;
+}
+
+#footer { 
+    border-top: 1px solid #666 !important;  
+    background-color: #d1d1d1 !important; 
+    opacity: 0.7;
+}    
+
+
+#block-cdm-dataportal-2 {
+    position: absolute;
+    top: -90px; /* if in first sidebar */
+    top: 280px;  /* if in header */
+    border: 0px solid red;
+}
+
+#block-cdm-dataportal-2 .form-item-search-doMisappliedNames {
+    visibility: hidden !important;
+}
+
+#block-cdm-dataportal-2 h2{
+    display:none;
+}
+
+#block-cdm-dataportal-2 > div:nth-child(4) {
+    float: right;
+    margin-top: -23px;
+}
+
+#cdm-dataportal-search-taxon-form {
+    width: 255px;
+}
+
+#cdm-dataportal-search-taxon-form div.form-type-textfield {
+    display: inline-block;
+    margin: 5px 0px;
+}
+
+#cdm-dataportal-search-taxon-form div.form-type-checkbox {
+    display: block;
+    margin: 5px 0px;
+}
+
+#cdm-dataportal-search-taxon-form input[type=submit]{
+    display: inline-block;
+    margin-top: -52px;
+    float: right;
+}
+
+
+#block-cdm-taxontree-cdm-tree {
+    width: 245px;  
+}
+
+#block-cdm-taxontree-cdm-tree div.cdm_taxontree_scroller_xy {
+    height:400px;
+}
+
+h3 {
+    font-size: 1.3em !important;
+    border-top: 1px solid black; 
+}
+
+div.scroll-up {
+    clear: both;
+    float: right;
+    margin-top: 10px;
+}
+div.scroll-up a {opacity:0.7;}
+div.scroll-up a:hover {opacity:1;}
+
+
+
+
+#experts table td, #experts table th {
+    padding: 5px 1em !important;
+    font-size: 0.8em;
+}
+
+
+#block-cdm-dataportal-feature-distribution div.export  {
+    clear: both;
+    display:block;
+    position: relative;
+    top: 62px;
+    z-index: 999;
+    left: calc(100% - 5em);
+}
+#block-cdm-dataportal-feature-distribution div.export a, 
+#block-cdm-dataportal-feature-distribution div.export a:visited {
+    text-decoration: none;
+    color: #d50000;
+    padding: 4px 4px 4px 4px;
+    border-radius: 8px;
+    border: 1px solid #D50000;
+}
+#block-cdm-dataportal-feature-distribution div.export a:hover {
+    background-color: #d50000;
+    color: #fff !important;
+}
+
+/*#openlayers {margin: auto 15%;}*/
+
+
+#openlayers_map {
+    width: 99%;
+    /*
+    margin-left: 0.5% !important;
+    margin-right: 0.5% !important;
+    margin-top: 3px !important;
+    */
+}
+
+.openlayers_legend {
+    /*
+    float: right;
+    top: 0 !important;
+    left: 0 !important;
+    margin-top: -501px;
+    margin-right: 0.4%;
+    */
+}
+
+#distribution_world_length, 
+#distribution_world_filter,
+#distribution_world_info,
+#distribution_world_paginate {
+    display:block;
+}
+#export_distribution_world {
+    top: 41px;
+}
+
+.dataTables_info {
+    /* width: 100%; */
+    float:left;
+}
+.dataTables_paginate {float:right;}
+.dataTables_wrapper  {
+    margin-bottom: 50px;
+}
+
+.dataTables_wrapper tr td {
+    font-size: 1em;
+    line-height: 24px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.dataTables_wrapper tr.present {
+    color: #299105; /* green of map */
+}
+.dataTables_wrapper tr.absent {
+    color: #ea6262; /* red of map*/
+    color: #a72023; /* dark red */
+}
+.dataTables_wrapper tr.no_data, .dataTables_wrapper tr td span.no_data {
+    color: black;
+}
+
+.dataTables_wrapper tr.odd {
+    background-color: #efefef !important;
+}
+
+.dataTables_wrapper tr.odd td.sorting_1, .dataTables_wrapper tr.odd td.sorting_2 {
+    background-color: #efefef !important;
+}
+
+.dataTables_wrapper tr.even td.sorting_1, .dataTables_wrapper tr.even td.sorting_2 {
+    background-color: #ffffff !important;
+}
+
+.dataTables_length {float:left; margin-right: 0px; margin-bottom:18px;}
+.dataTables_filter {float:right; margin-right: 0px; margin-bottom:18px;}
+
+.paginate_enabled_next, .paginate_disabled_next {
+    margin-left: 30px !important;
+}
+
+#page-toc {
+    float: none !important;
+}
+
+#page-toc h3{
+    display: none;
+}
+
+#page-toc ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    margin-bottom: 10px;
+}
+
+#page-toc ul li {
+    float: left;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-radius: 5px;
+    background-color: #ccc;
+    color: #000;
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 1.4em;
+}
+
+#page-toc ul li a {
+    color: #000 !important;
+}
+#page-toc ul li a:hover, #page-toc ul li:hover{
+    /*background-color: #fff;*/ 
+    text-decoration: underline;
+}
+
+.distributionlist_table{
+    width: 100%;
+    font-size: 1.2em;
+}
+
+.distributionlist_caption{
+    color: black; 
+    background-color: rgb(223,223,223);
+    font-size: 12pt;
+    font-weight: normal;
+    line-height: 30px;
+}
+
+.distributionlist_colgroup{
+    text-align: left;
+}
+
+.distributionlist_col_country_region{
+    width: 90%;
+}
+
+.distributionlist_col_status{
+    width: 10%;
+}
+
+.distributionlist_head{
+    text-align: left;
+    height: 30px;
+}
+
+.distributionlist_body{}						  
+
+
+.pane-user-login {
+    margin-bottom: 20px;
+    display: none;
+}
+.pane-cdm-dataportal-fundedbyedit{
+    padding-top: 26px;
+}
+
+.block-cdm-dataportal-feature {margin-top: 70px;}
+
+#common-names-table_wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+.common_names_as_common_names table {
+    width: 100%;
+}
+.common_names_as_common_names ul {
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+}
+.vernacular-name {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.footnote-anchor {display: none;}
+
+/***************** external links *************/
+
+.ui-accordion .ui-accordion-header {
+    padding-left: 25px;
+    margin-top: 20px !important;
+}
+
+
+/************* DEBUGGING ONLY  ***********/
+
+.debug-control {
+    position: fixed;
+    top: 3px;
+    right: 250px;
+    color: white;
+    z-index: 9999;
+    color: white;
+    background: black;
+    border: 1px solid white;
+    padding: 2px;
+    cursor: pointer;
+}
+.debug-control:hover {
+    color: black;
+    background: #efefef;
+}
+
+#dist-view {
+    min-height:200px; 
+    display: none;
+}
+
+.debuginfo {
+    z-index:999;
+    font-size:0.9em;
+    background:black;
+    color:white;
+    padding:2px;
+}
+.debuginfo a {color:white;}
+
+.jsonview {
+    font-family: monospace;
+    font-size: 1.2em;
+    white-space: pre-wrap; }
+.jsonview .prop {
+    font-weight: bold; }
+.jsonview .null {
+    color: red; }
+.jsonview .bool {
+    color: blue; }
+.jsonview .num {
+    color: blue; }
+.jsonview .string {
+    color: green;
+    white-space: pre-wrap; }
+.jsonview .string.multiline {
+    display: inline-block;
+    vertical-align: text-top; }
+.jsonview .collapser {
+    position: absolute;
+    left: -1em;
+    cursor: pointer; }
+.jsonview .collapsible {
+    transition: height 1.2s;
+    transition: width 1.2s; }
+.jsonview .collapsible.collapsed {
+    height: .8em;
+    width: 1em;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0; }
+.jsonview .collapsible.collapsed:before {
+    content: "…";
+    width: 1em;
+    margin-left: .2em; }
+.jsonview .collapser.collapsed {
+    transform: rotate(0deg); }
+.jsonview .q {
+    display: inline-block;
+    width: 0px;
+    color: transparent; }
+.jsonview li {
+    position: relative; }
+.jsonview ul {
+    list-style: none;
+    margin: 0 0 0 2em;
+    padding: 0; }
+.jsonview h1 {
+    font-size: 1.2em; }
+
+
+/************* MEDIA QUERIES *****/
+
+
+@media all and (max-width: 480px) {
+    #content {
+        width: 100% !important;
+    }
+    .sidebar-second .region-sidebar-second {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: block;
+    }
+    #block-cdm-taxontree-cdm-tree {
+        width: 100%;
+    }
+    #navigation ul.nice-menu {
+        font-size: 0.97em !important;
+    } 
+    #navigation ul.nice-menu li .nolink{
+        display:block;
+        padding-top: 5px;
+    } 
+    /*    #navigation .links li {
+            padding: 0px 5px !important;
+            font-size: 0.9em;
+        }*/
+    #page-toc ul li {
+        font-size: 0.7em;
+    }
+} 
+
+@media all and (min-width: 480px) {
+    #content {
+        width: 100% !important;
+    }
+    .sidebar-second .region-sidebar-second {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: block;
+    }
+    #block-cdm-taxontree-cdm-tree {
+        width: 100%;
+    }
+    #navigation ul.nice-menu {
+        font-size: 0.97em !important;       
+    } 
+    #navigation ul.nice-menu li .nolink{
+        display:block;
+        padding-top: 3px;
+    } 
+    /*    #navigation .links li {
+             padding: 0px 5px !important;
+             font-size: 0.9em;
+         }*/
+    #page-toc ul li {
+        font-size: 0.8em;
+    }
+}
+
+@media all and (min-width: 640px) {
+    #content {
+        width: 66% !important;
+    }
+    .sidebar-second .region-sidebar-second {
+        width: 33% !important;
+        margin-left: 66% !important;
+    }
+    #page-toc ul li {
+        font-size: 0.7em;
+    }
+    #navigation ul.nice-menu {
+        font-size: 1em !important;  
+    }
+    #navigation ul.nice-menu li .nolink{
+        display:block;
+        padding-top: 3px;
+    } 
+    /*    #navigation .links li {
+            padding: 0px 5px !important;
+        }*/
+} 
+
+
+@media all and (min-width: 768px) {
+    #content {
+        width: 66% !important;
+    }
+    .sidebar-second .region-sidebar-second {
+        width: 33% !important;
+        margin-left: 66% !important;
+    }
+    #page-toc ul li {
+        font-size: 1.0em;
+    }
+    #navigation .links li {
+        padding: 0px 10px !important;
+    }
+    #navigation ul.nice-menu li .nolink{
+        display:block;
+        padding-top: 3px;
+    } 
+} 
+
+
+
+
