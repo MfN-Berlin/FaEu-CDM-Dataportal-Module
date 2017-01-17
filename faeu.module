@@ -26,7 +26,27 @@
  */
 define("DEBUGMODE",1);
 
+function faeu_block_info() {
+    $blocks = array();
+    $blocks["funded_by_eu_bon"]["info"] = t('Funded by EU BON');
+    return $blocks;
+}
 
+function faeu_block_view($delta) {
+    $block = array();
+    switch ($delta) {
+    case 'funded_by_eu_bon':
+        $block['subject'] = t("Funded by EU BON");
+        $block['content'] = array(
+          '#theme' => 'image',
+          '#path' => drupal_get_path('module', 'faeu') . '/eubon_logo_180.png',
+          '#alt' => t('EU BON Logo'),
+          '#title' => '',
+        );
+        break;
+    }
+    return $block;
+}
 
 // $id$
 /**
